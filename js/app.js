@@ -5,10 +5,13 @@ let phrase = document.getElementById('phrase');
 let startButton = document.getElementsByClassName('btn_reset');
 let missed = 0;
 
+
 // Create an array named phrases
 // Source: https://www.ef.edu/english-resources/english-idioms/
 
 let phrases = [
+// index 0 never chosen due to random number generator being set to 1
+"",
 "blessing in disguise",
 "dime a dozen",
 "better late than never",
@@ -21,11 +24,14 @@ let phrases = [
 "you can say that again",
 ];
 
+
 // return a random phrase from an array
-const getRandomPhrasAsArray = arr => {
-// generates random number between 0 and length of the array    
-let randomNumber = (Math.floor(Math.random() * phrases.length));
+let getRandomPhraseAsArray = (phrases) => {
+// generates random number between 1 and length of the array    
+let randomNumber = Math.floor((Math.random() * phrases.length) + 1);
+// assigns index value of array to variable randomPhrase
 let randomPhrase = phrases[randomNumber];
+// returns randomPhrase
 return(randomPhrase);
 }
 
