@@ -41,23 +41,26 @@ let randomPhrase = arr[randomNumber];
 return randomPhrase.split('');
 }
 
-getRandomPhraseAsArray(phrases);
+let newPhrase = getRandomPhraseAsArray(phrases);
+
 
 
 // adds the letters of a string to the display 
-function addPhraseToDisplay(randomPhrase) {
-    for (let i = 0; i < randomPhrase.length; i++ ) {
+function addPhraseToDisplay(newPhrase) {
+    for (let i = 0; i < newPhrase.length; i++ ) {
         let li = document.createElement('li');
-        li.textContent = randomPhrase[i];
+        li.textContent = newPhrase[i];
         let ul = document.querySelector('#phrase ul');
-        ul.appendChild(li);
-            if (arr[i] !== '') {
+        ul.append(li);
+            if (newPhrase[i] !== '') {
                 li.className = 'letter';
             } else { 
                 li.className = 'space';
             }
     }
 }
+
+console.log(addPhraseToDisplay(newPhrase));
 
 
 //listen for the onscreen keyboard to be clicked
