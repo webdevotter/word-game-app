@@ -32,14 +32,17 @@ addEventListener('click', (startButton) => {
 });
 
 // return a random phrase from an array
-function getRandomPhraseAsArray(phrases) {
+function getRandomPhraseAsArray(arr) {
 // generates random number between 1 and length of the array    
-let randomNumber = Math.floor((Math.random() * phrases.length) + 1);
+let randomNumber = Math.floor((Math.random() * arr.length) + 1);
 // assigns index value of array to variable randomPhrase
-let randomPhrase = phrases[randomNumber];
+let randomPhrase = arr[randomNumber];
 // returns randomPhrase
-return randomPhrase;
+return randomPhrase.split('');
 }
+
+getRandomPhraseAsArray(phrases);
+
 
 // adds the letters of a string to the display 
 function addPhraseToDisplay(randomPhrase) {
@@ -93,18 +96,19 @@ function checkWin() {
     let listEl = document.getElementsByClassName('letter');
     let show = document.getElementsByClassName('show');
     let ul = document.getElementById('unList');
+    let title = document.getElementsByClassName('title');
     
     if (listEl. length === show.length && missed < 4) {
         overlay.style.display = 'flex';
         overlay.className = 'win';
         title.textContent = 'You Won';
-        ul.style.display = 'none';
+        
         startButton.textContent = 'Start Over';
     } else {
         overlay.style.display = 'flex';
         overlay.className = 'lose';
         title.textContent = 'You Lost';
-        ul.style.display = 'none';
+        // ul.style.display = 'none';
         startButton.textContent = 'Start Over';
         startOver();
     }
