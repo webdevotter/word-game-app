@@ -5,6 +5,13 @@ const phrase = document.getElementById('phrase');
 const startButton = document.getElementsByClassName('btn__reset');
 const overlay = document.getElementById('overlay');
 let missed = 0;
+let listEl = document.getElementsByClassName('letter');
+let ul = document.querySelector('#phrase ul');
+let show = document.getElementsByClassName('show');
+let buttonText = document.querySelector('#overlay a');
+
+
+
 
 
 
@@ -50,7 +57,6 @@ function addPhraseToDisplay(newPhrase) {
     for (let i = 0; i < newPhrase.length; i++ ) {
         let li = document.createElement('li');
         li.textContent = newPhrase[i];
-        let ul = document.querySelector('#phrase ul');
         ul.append(li);
             if (newPhrase[i].trim().length === 0) {
                 li.className = 'space';
@@ -64,7 +70,6 @@ console.log(addPhraseToDisplay(newPhrase));
 
 // // check if a letter is in the phrase 
 function checkLetter(button) {
-    let listEl = document.getElementsByClassName('letter');
     let match = null;
         for (let i = 0; i < listEl.length; i++) {
             if (listEl[i].textContent.toLowerCase() === button.textContent.toLowerCase()) {
@@ -80,9 +85,11 @@ qwerty.addEventListener('click', (e) => {
     let target = e.target;
     let letterMatch = checkLetter(target);
     let hearts = document.querySelectorAll('img');
-        if (target.className === 'button') {
-            target.className === 'chosen';
+
+            if (target.tagName === 'BUTTON') {
+            target.className = 'chosen';
             target.setAttribute('disabled', '');
+            
         } else {
             
             target.setAttribute('disabled', '');
@@ -94,34 +101,23 @@ qwerty.addEventListener('click', (e) => {
     checkWin();
 });
 
-// console.log(checkWin());
+
 
 // check if the game has been won or lost
 function checkWin() {
-    let listEl = document.getElementsByClassName('letter');
-    let show = document.getElementsByClassName('show');
-    let ul = document.getElementById('unList');
-    let title = document.getElementsByClassName('title');
-    
-    if (listEl.length === show.length && missed < 4) {
-        overlay.style.display = 'flex';
+    let title = document.querySelector('#overlay .title');    
+    if (listEl.length === show.length) {
+        
         overlay.className = 'win';
         title.textContent = 'You Won';
-        ul.style.display = 'none';
-        startButton.textContent = 'Start Over';
-    } else {
-        overlay.style.display = 'flex';
+        
+        buttonText.textContent = 'Play Again!';
+    } else if (missed === 5) {
+         
         overlay.className = 'lose';
         title.textContent = 'You Lost';
-        ul.style.display = 'none';
-        startButton.textContent = 'Start Over';
-        startOver();
+        
+        buttonText.textContent = 'Try Again';
     }
-
-}
-
-function startOver() {
-        startButton.addEventListener('click', () => {
-        start.reload();
-    });
+   
 }
