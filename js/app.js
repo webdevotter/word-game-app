@@ -2,18 +2,13 @@
 
 const qwerty = document.getElementById('qwerty');
 const phrase = document.getElementById('phrase');
-const startButton = document.getElementsByClassName('btn__reset');
-const overlay = document.getElementById('overlay');
+let startButton = document.getElementsByClassName('btn__reset');
+let overlay = document.getElementById('overlay');
 let missed = 0;
 let listEl = document.getElementsByClassName('letter');
 let ul = document.querySelector('#phrase ul');
 let show = document.getElementsByClassName('show');
 let buttonText = document.querySelector('#overlay a');
-
-
-
-
-
 
 // Create an array named phrases
 // Source: https://www.ef.edu/english-resources/english-idioms/
@@ -32,7 +27,8 @@ const phrases = [
 ];
 
 // listen for the start game button to be pressed
-// add event listener to button with id btn_reset and global variable startButton
+// add event listener to button with id btn_reset 
+
 addEventListener('click', (startButton) => {
       //set style of overlay to none
     overlay.style.display = 'none'; 
@@ -49,8 +45,6 @@ return randomPhrase.split('');
 }
 
 const newPhrase = getRandomPhraseAsArray(phrases);
-
-
 
 // adds the letters of a string to the display 
 function addPhraseToDisplay(newPhrase) {
@@ -74,6 +68,7 @@ function checkLetter(button) {
         for (let i = 0; i < listEl.length; i++) {
             if (listEl[i].textContent.toLowerCase() === button.textContent.toLowerCase()) {
                 listEl[i].classList.add('show');
+                listEl[i].classList.add('zoom');
                 match = button.textContent;
             }
         }
@@ -85,13 +80,10 @@ qwerty.addEventListener('click', (e) => {
     let target = e.target;
     let letterMatch = checkLetter(target);
     let hearts = document.querySelectorAll('img');
-
             if (target.tagName === 'BUTTON') {
             target.className = 'chosen';
-            target.setAttribute('disabled', '');
-            
-        } else {
-            
+            target.setAttribute('disabled', '');            
+        } else {            
             target.setAttribute('disabled', '');
         }
         if (letterMatch === null) {
@@ -101,23 +93,26 @@ qwerty.addEventListener('click', (e) => {
     checkWin();
 });
 
-
+  
 
 // check if the game has been won or lost
 function checkWin() {
-    let title = document.querySelector('#overlay .title');    
-    if (listEl.length === show.length) {
-        
+    let title = document.querySelector('#overlay .title');
+    let overlay = document.getElementById('overlay');   
+    let listEl = document.getElementsByClassName('letter');
+    let show = document.getElementsByClassName('show'); 
+    let buttonText = document.querySelector('#overlay a');
+    if (listEl.length === show.length) {        
         overlay.className = 'win';
-        title.textContent = 'You Won';
-        
+        overlay.style.display = ''; 
+        title.textContent = 'You Won';        
         buttonText.textContent = 'Play Again!';
-    } else if (missed === 5) {
-         
+       
+    } if (missed > 4) {         
         overlay.className = 'lose';
-        title.textContent = 'You Lost';
-        
+        overlay.style.display = '';
+        title.textContent = 'You Lost';        
         buttonText.textContent = 'Try Again';
-    }
-   
+        
+    }   
 }
