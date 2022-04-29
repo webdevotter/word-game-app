@@ -29,7 +29,9 @@ const phrases = [
 // listen for the start game button to be pressed
 // add event listener to button with id btn_reset 
 
-addEventListener('click', (startButton) => {
+
+
+buttonText.addEventListener('click', (buttonText) => {
       //set style of overlay to none
     overlay.style.display = 'none'; 
 });
@@ -102,17 +104,28 @@ function checkWin() {
     let listEl = document.getElementsByClassName('letter');
     let show = document.getElementsByClassName('show'); 
     let buttonText = document.querySelector('#overlay a');
-    if (listEl.length === show.length) {        
+    let hearts = document.querySelectorAll('img');
+    if (listEl.length === show.length) { 
         overlay.className = 'win';
-        overlay.style.display = ''; 
+        overlay.style.display = 'flex'; 
         title.textContent = 'You Won';        
         buttonText.textContent = 'Play Again!';
-       
-    } if (missed > 4) {         
+        restart();
+                            
+    } if (missed > 4) {     
         overlay.className = 'lose';
-        overlay.style.display = '';
+        overlay.style.display = 'flex';
         title.textContent = 'You Lost';        
         buttonText.textContent = 'Try Again';
+        restart();
         
+                          
     }   
+}
+// Restart Game
+function restart() {
+    buttonText.addEventListener('click', (buttonText) => {
+        location.reload();
+    });
+//    Source: https://www.w3schools.com/jsref/met_loc_reload.asp  
 }
