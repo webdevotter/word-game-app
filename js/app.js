@@ -82,16 +82,16 @@ qwerty.addEventListener('click', (e) => {
     let target = e.target;
     let letterMatch = checkLetter(target);
     let hearts = document.querySelectorAll('img');
+
             if (target.tagName === 'BUTTON') {
-            target.className = 'chosen';
-            target.setAttribute('disabled', '');            
-        } else {            
-            target.setAttribute('disabled', '');
-        }
-        if (letterMatch === null) {
-           hearts[missed].setAttribute('src', 'images/lostHeart.png');
-           missed++;
-        }
+                target.className = 'chosen';
+                target.setAttribute('disabled', '');            
+         
+            if (letterMatch === null) {
+                hearts[missed].setAttribute('src', 'images/lostHeart.png');
+                missed++;
+        }   
+    }
     checkWin();
 });
 
@@ -124,7 +124,7 @@ function checkWin() {
 }
 // Restart Game
 function restart() {
-    buttonText.addEventListener('click', (buttonText) => {
+      buttonText.addEventListener('click', (buttonText) => {
         location.reload();
     });
 //    Source: https://www.w3schools.com/jsref/met_loc_reload.asp  
